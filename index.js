@@ -86,3 +86,41 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+console.log("Financial Analysis");
+console.log("------------------");
+//*The total number of months included in the dataset.
+console.log("Total months: " + finances.length);
+
+//*The net total amount of Profit/Losses over the entire period.
+
+var netTotal=0 //// create a variable for the sum and initialize it
+
+for (var i =0; i<finances.length; i++) {
+netTotal += finances[i][1];
+}
+console.log("Total: " + "$" +netTotal);
+
+//* The average of the **changes** in Profit/Losses over the entire period.
+    //* You will need to track what the total change in Profit/Losses are from month to month and then find the average.
+    // * (`Total/(Number of months - 1)`)
+  
+let differences = [];
+for (let i = 1; i < finances.length; i++) {
+  let difference = finances[i][1] - finances[i - 1][1]; //to findout the average differences between the months
+  differences.push(difference);
+}
+let averageChange = differences.reduce((accumulator, value) => {
+return accumulator + value;
+  }, 0) /             //source:youTube-code Tour channel
+  
+(finances.length - 1);
+
+console.log("Average Change: " + averageChange.toFixed(2));
+
+//* The greatest increase in Profit/Losses (date and amount) over the entire period.
+
+console.log("Greatest Increase in Profits/Losses: " + Math.max(...differences));
+
+//* The greatest decrease in Profit/Losses (date and amount) over the entire period.
+console.log("Greatest Decrease in Profits/Losses: " + Math.min(...differences));
